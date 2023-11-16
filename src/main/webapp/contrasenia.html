@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+</script>
+<script
+      src="https://kit.fontawesome.com/64d58efce2.js"></script>
+<link rel="stylesheet" href="common/css/style.css">
+</head>
+<body>
+<div class="container">
+      <div class="forms-container">
+        <div class="signin-signup">
+          <form action="./SignInAuthenticator" method="post" class="sign-in-form" name="signIn">
+            <h2 class="title">Recuperar Contraseña</h2>
+            <div class="input-field">
+              <i class="fas fa-envelope"></i>
+              <input required type="email" name="emailUsuario" onkeypress="return validarEntrada(event)" placeholder="Correo" />
+            </div>
+            <a href="index.html">¿Recordaste la contraseña?</a>
+            <input type="button" value="Enviar" class="btn solid" onclick="enviarCorreo()"/>
+			<h4 id="resultado"></h4>
+          </form>
+        </div>
+      </div>
+
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <img src="common/img/recuperacion.png" class="image" alt="" />
+        </div>
+        <div class="panel right-panel">
+          <img src="common/img/woman.png" class="image" alt="" />
+        </div>
+      </div>
+    </div>
+    <script src="common/js/main.js"></script>
+</body>
+</html>
