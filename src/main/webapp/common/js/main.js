@@ -1,49 +1,70 @@
-function validarEntrada(evento) {
+// Esta función se llama cuando se intenta validar una entrada, como la entrada de un usuario en un formulario.
+function validarEntrada(event) {
 	var keycode;
-	if (window.event) keycode = window.event.keyCode;
-	else if (evento) keycode = evento.which;
-	else return true;
-	if ((keycode < 48 || keycode > 57) && (keycode < 64 || keycode > 90) && (keycode < 97 || keycode > 122)) //Rango ASCII de números y letras
-		if (keycode != 8 && keycode != 13 && keycode != 27 && keycode != 0) { //Caracteres especiales permitidos
-			alert('Sólo puedes introducir letras y números');
-			return false;
-		} else if (keycode == 13)
-			enviarLogin();
-		else return true;
-	else return true;
+
+	// Utilizamos el parámetro event directamente para obtener el código de tecla
+	if (event)
+		keycode = event.which || event.keyCode;
+	else
+		return true;
+
+	// Comprobar si el código de tecla está fuera del rango de números y letras ASCII
+	if ((keycode < 48 || keycode > 57) && (keycode < 64 || keycode > 90) && (keycode < 97 || keycode > 122)) {
+
+		// Si el código de tecla no está en el rango y no es un carácter especial permitido, muestra un error y bloquea la entrada.
+		if (keycode != 8 && keycode != 13 && keycode != 27 && keycode != 0) {
+			alert('Sólo puedes introducir letras y números.');
+			return false; // Evitar que el carácter se introduzca
+		} else if (keycode == 13) {
+			enviarLogin(); // Si se presiona Enter (código 13), llamar a la función enviarLogin()
+		} else {
+			return true; // Permitir caracteres especiales (teclas de control, Enter, etc.)
+		}
+	} else {
+		return true; // Permitir letras y números
+	}
 }
 
+// Función para manejar el envío del formulario de inicio de sesión
 function enviarSignIn() {
+	// Obtener los datos del formulario de inicio de sesión
 	datos = document.signIn;
+
+	// Verificar si los campos de DNI y contraseña están vacíos
 	if (datos.dniUsuario.value == '' || datos.password.value == '')
+		// Mostrar mensaje de error si hay campos vacíos
 		document.getElementById("error2").innerHTML = 'Tienes que rellenar todos los campos.';
-	else if (!/^\d{8}[A-Za-z]$/.test(datos.dniUsuario.value)) {
+	// Verificar el formato del DNI utilizando una expresión regular
+	else if (!/^\d{8}[A-Za-z]$/.test(datos.dniUsuario.value))
 		document.getElementById("error2").innerHTML = 'El DNI no tiene un formato válido.';
-	}
+	// Enviar el formulario si todas las validaciones pasan
 	else datos.submit();
 }
 
+// Función para manejar el envío del formulario de registro
 function enviarSignUp() {
+	// Obtener los datos del formulario de registro
 	datos = document.signUp;
-	if (datos.nombreUsuario.value == '' || datos.apellidosUsuario.value == '' || datos.dniUsuario.value == '' || datos.tlfUsuario.value == '' || datos.password.value == '' || datos.email.value == '') {
+
+	if (datos.nombreUsuario.value == '' || datos.apellidosUsuario.value == '' || datos.dniUsuario.value == '' || datos.tlfUsuario.value == '' || datos.password.value == '' || datos.email.value == '')
 		document.getElementById("error1").innerHTML = 'Tienes que rellenar todos los campos.';
-	} else if (datos.nombreUsuario.value.length < 5) {
+	else if (datos.nombreUsuario.value.length < 5)
 		document.getElementById("error1").innerHTML = 'El nombre de usuario debe tener al menos 5 caracteres.';
-	} else if (!/^(?=.*\d)[A-Za-z\d]{7,}$/.test(datos.password.value)) {
+	else if (!/^(?=.*\d)[A-Za-z\d]{7,}$/.test(datos.password.value))
 		document.getElementById("error1").innerHTML = 'La contraseña debe tener al menos un número y 7 caracteres.';
-	} else if (!/^\d{8}[A-Za-z]$/.test(datos.dniUsuario.value)) {
+	else if (!/^\d{8}[A-Za-z]$/.test(datos.dniUsuario.value))
 		document.getElementById("error1").innerHTML = 'El DNI no tiene un formato válido.';
-	} else if (!/.*@.*/.test(datos.email.value)) {
+	else if (!/.*@.*/.test(datos.email.value))
 		document.getElementById("error1").innerHTML = 'El email debe contener "@".';
-	} else if (!/^\d{9}$/.test(datos.tlfUsuario.value)) {
+	else if (!/^\d{9}$/.test(datos.tlfUsuario.value))
 		document.getElementById("error1").innerHTML = 'El teléfono debe contener 9 dígitos.';
-	}
 	else
 		datos.submit();
 }
 
+// Función para manejar el envío del formulario de recuperación de contraseña por correo
 function enviarCorreo() {
-	datos = document.signIn;
+	datos = document.recuperaClave;
 	if (datos.emailUsuario.value == '') {
 		document.getElementById("resultado").innerHTML = 'Tienes que indicar un email.';
 	} else if (!/.*@.*/.test(datos.emailUsuario.value)) {
