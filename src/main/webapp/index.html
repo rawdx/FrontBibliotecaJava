@@ -13,62 +13,66 @@
 	<div class="container">
 		<div class="forms-container">
 			<div class="signin-signup">
+
 				<!-- Formulario de inicio de sesión -->
-				<form action="./RegistroAuth" method="post" class="sign-in-form" name="signIn">
+				<form action="./LoginUsuario" method="post" class="sign-in-form" name="login">
 					<h2 class="title">Iniciar Sesión</h2>
 					<div class="input-field">
 						<i class="fas fa-id-card"></i> <input type="text" name="dniUsuario"
-							onkeypress="return validarEntrada(event)" placeholder="DNI" />
+							onkeypress="return validarEntrada(event, 0)" placeholder="DNI" />
 					</div>
 					<div class="input-field">
 						<i class="fas fa-lock"></i> <input type="password" name="password"
-							onkeypress="return validarEntrada(event)" placeholder="Contraseña" />
+							onkeypress="return validarEntrada(event, 0)" placeholder="Contraseña" />
 					</div>
 					<a href="#" id="enlaceRecuperaClave">¿Olvidaste tu contraseña?</a>
-					<input type="button" value="Enviar" class="btn solid" onclick="enviarSignIn()" />
+					<input type="button" value="Enviar" class="btn solid" onclick="enviarLogin()" />
 					<h4 id="error2"></h4>
 				</form>
+
 				<!-- Formulario de registro -->
-				<form action="./SignUpAuthenticator" method="post" class="sign-up-form" name="signUp"
+				<form action="./RegistrarUsuario" method="post" class="sign-up-form" name="registro"
 					id="formularioRegistrarse">
 					<h2 class="title">Registrarse</h2>
-					<div class="input-field">
-						<i class="fas fa-user"></i> <input type="text" name="nombreUsuario"
-							onkeypress="return validarEntrada(event)" placeholder="Nombre" />
-					</div>
-					<div class="input-field">
-						<i class="fas fa-user"></i> <input type="text" name="apellidosUsuario"
-							onkeypress="return validarEntrada(event)" placeholder="Apellidos" />
+					<div class="nombreApellidos">
+						<div class="input-field">
+							<i class="fas fa-user"></i> <input type="text" name="nombreUsuario"
+								onkeypress="return validarEntrada(event, 1)" placeholder="Nombre" />
+						</div>
+						<div class="input-field">
+							<i class="fas fa-user"></i> <input type="text" name="apellidosUsuario"
+								onkeypress="return validarEntrada(event, 1)" placeholder="Apellidos" />
+						</div>
 					</div>
 					<div class="input-field">
 						<i class="fas fa-id-card"></i> <input type="text" name="dniUsuario"
-							onkeypress="return validarEntrada(event)" placeholder="DNI" />
+							onkeypress="return validarEntrada(event, 1)" placeholder="DNI" />
 					</div>
 					<div class="input-field">
-						<i class="fas fa-envelope"></i> <input type="email" name="email"
-							onkeypress="return validarEntrada(event)" placeholder="Email" />
+						<i class="fas fa-envelope"></i> <input type="text" name="email"
+							onkeypress="return validarEntrada(event, 1)" placeholder="Email" />
 					</div>
 					<div class="input-field">
 						<i class="fas fa-phone"></i> <input type="text" name="tlfUsuario"
-							onkeypress="return validarEntrada(event)" placeholder="Teléfono" />
+							onkeypress="return validarEntrada(event, 1)" placeholder="Teléfono" />
 					</div>
 					<div class="input-field">
 						<i class="fas fa-lock"></i> <input type="password" name="password"
-							onkeypress="return validarEntrada(event)" placeholder="Contraseña" />
+							onkeypress="return validarEntrada(event, 1)" placeholder="Contraseña" />
 					</div>
-					<input type="button" value="Enviar" class="btn" onclick="enviarSignUp()" />
+					<input type="button" value="Enviar" class="btn" onclick="enviarRegistrar()" />
 					<h4 id="error1"></h4>
 				</form>
+
 				<!-- Formulario de recuperación de contraseña -->
-				<form action="./SignUpAuthenticator" method="post" class="sign-up-form" name="recuperaClave"
+				<form action="./RecuperarClave" method="post" class="sign-up-form" name="recuperaClave"
 					id="formularioRecuperaClave" style="display: none;">
 					<h2 class="title">Recuperar Contraseña</h2>
-					<div class="input-field">
-						<i class="fas fa-envelope"></i>
-						<input type="email" name="emailUsuario" onkeypress="return validarEntrada(event)"
+					<div class="input-field"><i class="fas fa-envelope"></i>
+						<input type="text" name="emailUsuario" onkeypress="return validarEntrada(event, 2)"
 							placeholder="Email" />
 					</div>
-					<input type="button" value="Enviar" class="btn" onclick="enviarCorreo()" />
+					<input type="button" value="Enviar" class="btn" onclick="enviarRecuperar()" />
 					<h4 id="resultado"></h4>
 				</form>
 			</div>

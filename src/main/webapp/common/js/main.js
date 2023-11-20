@@ -1,5 +1,5 @@
 // Esta función se llama cuando se intenta validar una entrada, como la entrada de un usuario en un formulario.
-function validarEntrada(event) {
+function validarEntrada(event, tipoForm) {
 	var keycode;
 
 	// Utilizamos el parámetro event directamente para obtener el código de tecla
@@ -12,11 +12,24 @@ function validarEntrada(event) {
 	if ((keycode < 48 || keycode > 57) && (keycode < 64 || keycode > 90) && (keycode < 97 || keycode > 122)) {
 
 		// Si el código de tecla no está en el rango y no es un carácter especial permitido, muestra un error y bloquea la entrada.
-		if (keycode != 8 && keycode != 13 && keycode != 27 && keycode != 0) {
+		if (keycode != 8 && keycode != 13 && keycode != 27 && keycode != 0 && keycode != 32) {
 			alert('Sólo puedes introducir letras y números.');
 			return false; // Evitar que el carácter se introduzca
+
 		} else if (keycode == 13) {
-			enviarLogin(); // Si se presiona Enter (código 13), llamar a la función enviarLogin()
+			// Realizar acciones específicas según el tipo de formulario para cuando se introduzca Enter
+			event.preventDefault();
+			switch (tipoForm) {
+				case 0:
+					enviarLogin();
+					break;
+				case 1:
+					enviarRegistrar();
+					break;
+				case 2:
+					enviarRecuperar();
+					break;
+			}
 		} else {
 			return true; // Permitir caracteres especiales (teclas de control, Enter, etc.)
 		}
@@ -26,9 +39,9 @@ function validarEntrada(event) {
 }
 
 // Función para manejar el envío del formulario de inicio de sesión
-function enviarSignIn() {
+function enviarLogin() {
 	// Obtener los datos del formulario de inicio de sesión
-	datos = document.signIn;
+	datos = document.login;
 
 	// Verificar si los campos de DNI y contraseña están vacíos
 	if (datos.dniUsuario.value == '' || datos.password.value == '')
@@ -42,9 +55,9 @@ function enviarSignIn() {
 }
 
 // Función para manejar el envío del formulario de registro
-function enviarSignUp() {
+function enviarRegistrar() {
 	// Obtener los datos del formulario de registro
-	datos = document.signUp;
+	datos = document.registro;
 
 	if (datos.nombreUsuario.value == '' || datos.apellidosUsuario.value == '' || datos.dniUsuario.value == '' || datos.tlfUsuario.value == '' || datos.password.value == '' || datos.email.value == '')
 		document.getElementById("error1").innerHTML = 'Tienes que rellenar todos los campos.';
@@ -63,8 +76,9 @@ function enviarSignUp() {
 }
 
 // Función para manejar el envío del formulario de recuperación de contraseña por correo
-function enviarCorreo() {
+function enviarRecuperar() {
 	datos = document.recuperaClave;
+
 	if (datos.emailUsuario.value == '') {
 		document.getElementById("resultado").innerHTML = 'Tienes que indicar un email.';
 	} else if (!/.*@.*/.test(datos.emailUsuario.value)) {
