@@ -1,41 +1,55 @@
 // Esta función se llama cuando se intenta validar una entrada, como la entrada de un usuario en un formulario.
 function validarEntrada(event, tipoForm) {
-	var keycode;
+    var keycode;
 
-	// Utilizamos el parámetro event directamente para obtener el código de tecla
-	if (event)
-		keycode = event.which || event.keyCode;
-	else
-		return true;
+    // Utilizamos el parámetro event directamente para obtener el código de tecla
+    if (event)
+        keycode = event.which || event.keyCode;
+    else
+        return true;
 
-	// Comprobar si el código de tecla está fuera del rango de números y letras ASCII
-	if ((keycode < 48 || keycode > 57) && (keycode < 64 || keycode > 90) && (keycode < 97 || keycode > 122)) {
+    // Comprobar si el código de tecla está fuera del rango de números y letras ASCII
+    if ((keycode < 48 || keycode > 57) && (keycode < 64 || keycode > 90) && (keycode < 97 || keycode > 122)) {
 
-		// Si el código de tecla no está en el rango y no es un carácter especial permitido, muestra un error y bloquea la entrada.
-		if (keycode != 8 && keycode != 13 && keycode != 27 && keycode != 0 && keycode != 32 && keycode != 225 && keycode != 233 && keycode != 237 && keycode != 243 && keycode != 250 && keycode != 193 && keycode != 201 && keycode != 205 && keycode != 211 && keycode != 218) {
-			alert('Sólo puedes introducir letras y números.');
-			return false; // Evitar que el carácter se introduzca
+        // Si el código de tecla no está en el rango y no es un carácter especial permitido, muestra un error y bloquea la entrada.
+        if (keycode != 8 && keycode != 13 && keycode != 27 && keycode != 0 && keycode != 32 &&
+            keycode != 225 && keycode != 233 && keycode != 237 && keycode != 243 && keycode != 250 &&
+            keycode != 193 && keycode != 201 && keycode != 205 && keycode != 211 && keycode != 218) {
 
-		} else if (keycode == 13) {
-			// Realizar acciones específicas según el tipo de formulario para cuando se introduzca Enter
-			event.preventDefault();
-			switch (tipoForm) {
-				case 0:
-					enviarLogin();
-					break;
-				case 1:
-					enviarRegistrar();
-					break;
-				case 2:
-					enviarRecuperar();
-					break;
-			}
-		} else {
-			return true; // Permitir caracteres especiales (teclas de control, Enter, etc.)
-		}
-	} else {
-		return true; // Permitir letras y números
-	}
+            // Mostrar mensaje de error según el tipo de formulario
+            switch (tipoForm) {
+                case 0:
+                    document.getElementById("error2").innerHTML = 'Sólo puedes introducir letras y números.';
+                    break;
+                case 1:
+                    document.getElementById("error1").innerHTML = 'Sólo puedes introducir letras y números.';
+                    break;
+                case 2:
+                    document.getElementById("resultado").innerHTML = 'Sólo puedes introducir letras y números.';
+                    break;
+            }
+            return false; // Evitar que el carácter se introduzca
+
+        } else if (keycode == 13) {
+            // Realizar acciones específicas según el tipo de formulario para cuando se introduzca Enter
+            event.preventDefault();
+            switch (tipoForm) {
+                case 0:
+                    enviarLogin();
+                    break;
+                case 1:
+                    enviarRegistrar();
+                    break;
+                case 2:
+                    enviarRecuperar();
+                    break;
+            }
+        } else {
+            return true; // Permitir caracteres especiales (teclas de control, Enter, etc.)
+        }
+    } else {
+        return true; // Permitir letras y números
+    }
 }
 
 // Función para manejar el envío del formulario de inicio de sesión
