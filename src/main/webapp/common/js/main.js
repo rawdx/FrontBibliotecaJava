@@ -12,7 +12,7 @@ function validarEntrada(event, tipoForm) {
 	if ((keycode < 48 || keycode > 57) && (keycode < 64 || keycode > 90) && (keycode < 97 || keycode > 122)) {
 
 		// Si el código de tecla no está en el rango y no es un carácter especial permitido, muestra un error y bloquea la entrada.
-		if (keycode != 8 && keycode != 13 && keycode != 27 && keycode != 0 && keycode != 32) {
+		if (keycode != 8 && keycode != 13 && keycode != 27 && keycode != 0 && keycode != 32 && keycode != 225 && keycode != 233 && keycode != 237 && keycode != 243 && keycode != 250 && keycode != 193 && keycode != 201 && keycode != 205 && keycode != 211 && keycode != 218) {
 			alert('Sólo puedes introducir letras y números.');
 			return false; // Evitar que el carácter se introduzca
 
